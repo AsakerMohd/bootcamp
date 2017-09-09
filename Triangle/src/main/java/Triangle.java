@@ -1,18 +1,45 @@
+import java.util.List;
+import java.util.ArrayList;
 
 public class Triangle {
-	
-	private double x1, y1, x2, y2, x3, y3;
-	
-	public Triangle(float x1, float y1, float x2, float y2, float x3, float y3) {
-		this.x1 = x1;	this.y1 = y1;
-		this.x2 = x1;	this.y2 = y1;
-		this.x3 = x1;	this.y3 = y1;
-	//	assert(this.area() > 0);
-	}
-	
-	public double area() {
-		double area = ((x1-x3)*(y2-y1)-(x1-x2)*(y2-y3))/2;
-		
-	}
-}
 
+	private double x1, y1, x2, y2, x3, y3;
+	// we call x1, y1, etc., fields or instance variables
+	// and collectively they are the "representation" of the Triangle
+
+	// Our constructor
+	public Triangle(double x1, double y1, double x2, double y2, double x3, double y3) {
+		// We have to distinguish the x1 being passed to the constructor
+		// from the x1 that is a field.
+		// this.x1 is the field x1
+		this.x1 = x1;
+		this.y1 = y1;
+		this.x2 = x2;
+		this.y2 = y2;
+		this.x3 = x3;
+		this.y3 = y3;
+		assert(this.area() > 0.000001);
+	}
+
+	public double area() {
+		double area = ((x1 - x3) * (y2 - y1) - (x1 - x2) * (y3 - y1)) / 2;
+		if (area < 0)
+			area = -area;
+		return area;
+	}
+
+	public static void main(String[] args) {
+		Triangle t = new Triangle(10.3, 5.5, 3.2, 100.2, 89.7, 65.3);
+		Triangle x = new Triangle(2.3, 4.4, 5.0, 6.0, 7.0, 9.3);
+		List<Triangle> myList = new ArrayList<Triangle>();
+		myList.add(t);
+		myList.add(x);
+		for(int i = 0; i < myList.size(); i++) {
+			System.out.println("The area of our triangle is " + myList.get(i).area());
+		}
+		for (Triangle tri : myList) {
+			System.out.println("new for loop: " + tri.area());
+		}
+	}
+
+}
